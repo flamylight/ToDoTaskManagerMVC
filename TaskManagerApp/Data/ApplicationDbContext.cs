@@ -10,26 +10,26 @@ public class ApplicationDbContext: DbContext
         
     }
     
-    public DbSet<Task> Tasks { get; set; }
+    public DbSet<ToDoTask> Tasks { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Task>().HasData(
-            new Task
+        modelBuilder.Entity<ToDoTask>().HasData(
+            new ToDoTask
             {
                 Id = 1,
                 Title = "test1",
                 Description = "Description 1",
-                IsCompleted = false,
+                Status = "Active",
             },
-            new Task
+            new ToDoTask
             {
                 Id = 2,
                 Title = "test2",
                 Description = "Test 2",
-                IsCompleted = true,
+                Status = "Completed",
             });
     }
 }

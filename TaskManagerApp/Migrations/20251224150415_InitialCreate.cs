@@ -21,7 +21,7 @@ namespace TaskManagerApp.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
+                    Status = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,11 +30,11 @@ namespace TaskManagerApp.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "Description", "IsCompleted", "Title" },
+                columns: new[] { "Id", "Description", "Status", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Description 1", false, "test1" },
-                    { 2, "Test 2", true, "test2" }
+                    { 1, "Description 1", "Active", "test1" },
+                    { 2, "Test 2", "Completed", "test2" }
                 });
         }
 

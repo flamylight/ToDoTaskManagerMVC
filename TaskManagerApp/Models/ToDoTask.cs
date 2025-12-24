@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TaskManagerApp.Models;
 
-public class Task
+public class ToDoTask
 {
     public int Id { get; set; }
 
@@ -13,6 +13,6 @@ public class Task
     [StringLength(100, MinimumLength = 5,
         ErrorMessage = "Description must be between 5 and 100 characters")]
     public string Description { get; set; } = string.Empty;
-
-    public bool IsCompleted { get; set; }
+    
+    public string Status { get; set; } = "Active";
 }

@@ -21,7 +21,7 @@ namespace TaskManagerApp.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TaskManagerApp.Models.Task", b =>
+            modelBuilder.Entity("TaskManagerApp.Models.ToDoTask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,8 +34,9 @@ namespace TaskManagerApp.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -50,14 +51,14 @@ namespace TaskManagerApp.Migrations
                         {
                             Id = 1,
                             Description = "Description 1",
-                            IsCompleted = false,
+                            Status = "Active",
                             Title = "test1"
                         },
                         new
                         {
                             Id = 2,
                             Description = "Test 2",
-                            IsCompleted = true,
+                            Status = "Completed",
                             Title = "test2"
                         });
                 });
