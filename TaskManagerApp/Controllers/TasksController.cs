@@ -62,7 +62,14 @@ public class TasksController: Controller
     {
         if (ModelState.IsValid)
         {
-            _db.Tasks.Update(task);
+            ToDoTask? taskFromDb = _db.Tasks.Find(task.Id);
+        
+            if  (taskFromDb == null)
+                return NotFound();
+            
+            taskFromDb.Title = task.Title;
+            taskFromDb.Description = task.Description;
+            
             _db.SaveChanges();
             return RedirectToAction("Index");   
         }
@@ -96,7 +103,7 @@ public class TasksController: Controller
         return RedirectToAction("Index");   
     }
 
-    [HttpPost]
+    [HttpGet]
     public IActionResult Complete(int? id)
     {
         if (id == null || id == 0)
