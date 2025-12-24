@@ -13,6 +13,7 @@ public class TasksController: Controller
         _db = db;
     }
     
+    [HttpGet]
     public IActionResult Index()
     {
         List<ToDoTask> tasks = _db.Tasks.ToList();
@@ -20,6 +21,7 @@ public class TasksController: Controller
         return View(tasks);
     }
 
+    [HttpGet]
     public IActionResult Create()
     {
         return View();
@@ -92,5 +94,27 @@ public class TasksController: Controller
         _db.Tasks.Remove(task);
         _db.SaveChanges();
         return RedirectToAction("Index");   
+    }
+
+    [HttpPost]
+    public IActionResult Complete(int? id)
+    {
+        if (id == null || id == 0)
+        {
+            return NotFound();
+        }
+        
+        ToDoTask? task = _db.Tasks.Find(id);
+
+        if (task == null)
+        {
+            return NotFound();
+        }
+        
+        task.Complete();
+        _db.Update(task);
+        _db.SaveChanges();
+        
+        return RedirectToAction("Index");
     }
 }

@@ -15,4 +15,9 @@ public class ToDoTask
     public string Description { get; set; } = string.Empty;
     
     public string Status { get; set; } = "Active";
+
+    public void Complete()
+    {
+        Status = "Completed";
+    }
 }
